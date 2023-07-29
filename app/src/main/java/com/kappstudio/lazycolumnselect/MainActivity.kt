@@ -3,6 +3,7 @@ package com.kappstudio.lazycolumnselect
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -23,11 +24,20 @@ class MainActivity : ComponentActivity() {
                     val viewModel: MainViewModel = viewModel()
                     val uiState = viewModel.uiState.collectAsState()
 
-                    MultiSelectionColumn(
-                        items = uiState.value.items,
-                        selectedItems = uiState.value.multiSelections,
-                        onItemClicked = { viewModel.multiSelect(it) }
-                    )
+                    Row(modifier = Modifier.fillMaxSize()) {
+                        SingleSelectionColumn(
+                            items = uiState.value.items,
+                            selectedItem = uiState.value.singleSelection,
+                            onItemClicked = { viewModel.singleSelect(it) },
+                            modifier = Modifier.weight(1f)
+                        )
+                        MultiSelectionColumn(
+                            items = uiState.value.items,
+                            selectedItems = uiState.value.multiSelections,
+                            onItemClicked = { viewModel.multiSelect(it) },
+                            modifier = Modifier.weight(1f)
+                        )
+                    }
                 }
             }
         }
