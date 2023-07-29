@@ -22,10 +22,11 @@ class MainActivity : ComponentActivity() {
                 ) {
                     val viewModel: MainViewModel = viewModel()
                     val uiState = viewModel.uiState.collectAsState()
-                    SingleSelectionColumn(
+
+                    MultiSelectionColumn(
                         items = uiState.value.items,
-                        selectedItem = uiState.value.singleSelection,
-                        onItemClicked = { viewModel.singleSelect(it) }
+                        selectedItems = uiState.value.multiSelections,
+                        onItemClicked = { viewModel.multiSelect(it) }
                     )
                 }
             }

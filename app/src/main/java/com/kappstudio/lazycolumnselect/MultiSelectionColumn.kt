@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.Icon
@@ -16,12 +17,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.compose.foundation.lazy.items
 
 @Composable
-fun SingleSelectionColumn(
+fun MultiSelectionColumn(
     items: List<String>,
-    selectedItem: String,
+    selectedItems: List<String>,
     onItemClicked: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -40,7 +40,7 @@ fun SingleSelectionColumn(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(text = item)
-                if (item == selectedItem) {
+                if (item in selectedItems) {
                     Icon(
                         imageVector = Icons.Default.Check,
                         contentDescription = "Selected",
